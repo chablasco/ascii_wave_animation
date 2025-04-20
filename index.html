@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>CB ASCII Wave Animation</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.6.0/p5.min.js"></script>
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      background: black;
+      overflow: hidden;
+    }
+    canvas {
+      display: block;
+    }
+  </style>
+</head>
+<body>
+<script>
+let cols, rows;
+let t = 0;
+let charWidth = 2;
+let charHeight = 38;
+
+function setup() {
+  createCanvas(windowWidth, windowHeight);
+  textFont('Courier', 18);
+  textAlign(LEFT, TOP);
+  frameRate(15);
+
+  cols = int(width / charWidth);
+  rows = int(height / charHeight);
+}
+
+function draw() {
+  background(0);
+  fill(255);
+
+  for (let y = 0; y < rows; y++) {
+    for (let x = 0; x < cols; x++) {
+      let wave = Math.sin(radians(x * 12 + t)) + Math.cos(radians(y * 12 + t * 1.5));
+
+      let c;
+      if (wave > 1.2) {
+        c = '#';
+      } else if (wave > 0.5) {
+        c = '*';
+      } else if (wave > 0) {
+        c = '+';
+      } else if (wave > -0.5) {
+        c = '.';
+      } else {
+        c = ' ';
+      }
+
+      text(c, x * charWidth, y * charHeight);
+    }
+  }
+
+  t += 3;
+}
+</script>
+</body>
+</html>
