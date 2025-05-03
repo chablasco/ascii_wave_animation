@@ -60,8 +60,10 @@ function draw() {
 
   t += 3;
 }
-  function windowResized() {
+function windowResized() {
   resizeCanvas(windowWidth, windowHeight);
+  cols = int(width / charWidth);
+  rows = int(height / charHeight);
 }
 
 function mousePressed() {
